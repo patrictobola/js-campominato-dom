@@ -37,6 +37,20 @@ const randomBombs = (numberBombs, cellsNumber) => {
     return bombs;
 }
 
+// Creo una funziona che mi prenda tutte le celle
+const endGame = (bombList) => {
+    // Recupero tutte le celle create 
+    const allCells = cellContainer.querySelectorAll('div');
+    // Creo un ciclo for che mi mostri tutte le celle cliccate e quelle con le bombe
+    for (let i = 0; i < allCells.length; i++){
+        const singleCell = allCells[i];
+        singleCell.classList.add('clicked');
+        const cellNumber = parseInt(singleCell.innerText);
+        if(bombList.includes(cellNumber)){
+            singleCell.classList.add('bomb');
+        }
+    }
+}
 
 // Dichiaro il numero di bombe all'interno della griglia che a prescindere dalla difficoltà saranno sempre 16
 let numberBombs = 16;
@@ -64,6 +78,7 @@ playButton.addEventListener('click', function(){
     // Aggiungo le bombe alla partita
     generatedBombs = randomBombs(numberBombs, cells);
 
+    
     // Creo un flag per determinare se la partita è finita o meno 
     let isGameOver = false
 
@@ -72,12 +87,15 @@ playButton.addEventListener('click', function(){
     for (let i = 1; i <= cells; i++){
         // Creo la cella 
         const cell = createCell(difficult, i);
+
+        // Metto la cella all'interno del dom 
+        cellContainer.appendChild(cell)
+
         // Al click abbiamo un evento che aggiunge classe e tiene conto del punteggio  
         cell.addEventListener('click', function(){
+
+            // Se gameover è true fermiamo il gioco 
             if(isGameOver) {
-                // Recupero tutte le celle create 
-                const allCells = cellContainer.querySelectorAll('div');
-                allCells.classList.add('clicked')
                 return
             }
                 
@@ -90,20 +108,14 @@ playButton.addEventListener('click', function(){
                 }
             }
             // Creo un ciclo for che controlla l'array con le bombe e mi controlla se al click ho preso una bomba o meno
-            for(let i = 0; i < generatedBombs.length; i++){
+            for(let i = 0; i < generatedBombs.length - 1; i++){
                 if(parseInt(cell.innerText) === generatedBombs[i]){
                     cell.classList.add('bomb')
                     message.innerText = `Beccato una bomba! Hai perso nabbo!`;
                     isGameOver = true;
+                    endGame(generatedBombs);
                 }
             }
         });
-        
-        // Metto la cella all'interno del dom 
-        cellContainer.appendChild(cell)
     }
-    
-
-
 })
-
