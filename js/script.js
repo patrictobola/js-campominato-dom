@@ -61,26 +61,32 @@ playButton.addEventListener('click', function(){
 
     // Aggiungo le bombe alla partita
     generatedBombs = randomBombs(numberBombs, cells);
-    
+
+    // Creo un flag per determinare se la partita è finita o meno 
+    let isGameOver = false
+
+
     // Creo il ciclo for che mi crea le caselle nel DOM 
     for (let i = 1; i <= cells; i++){
         // Creo la cella 
         const cell = createCell(difficult, i);
         // Al click abbiamo un evento che aggiunge classe e tiene conto del punteggio  
         cell.addEventListener('click', function(){
-
+            if(isGameOver) return
             // Controllo se al click la cella non è già stata cliccata e in quel caso... 
             if(!cell.classList.contains('clicked')){
                 cell.classList.add('clicked')
-                console.log(generatedBombs)
-                console.log(i)
                 scoreField.innerHTML = ++score;
+                if (score === (cells - numberBombs)){
+                    alert(`Daje hai vinto!`)
+                }
             }
             // Creo un ciclo for che controlla l'array con le bombe e mi controlla se al click ho preso una bomba o meno
             for(let i = 0; i < generatedBombs.length; i++){
                 if(parseInt(cell.innerText) === generatedBombs[i]){
                     cell.classList.add('bomb')
-                    console.log(`La partita è terminata, nabbo!`)
+                    alert(`La partita è terminata, nabbo!`)
+                    isGameOver = true;
                 }
             }
         });
