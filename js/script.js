@@ -19,6 +19,26 @@ const createCell = (a, b) => {
     return cell
 } 
 
+// Creo una funzione che generi dei numeri casuali da 1 a max
+const randomNumber = (max) => Math.floor(Math.random() * max) + 1;
+
+// Creo una funzione che generi un numero X di bombe e le inserisca all'interno di un array per poterle successivamente riutilizzare 
+const randomBombs = (numberBombs, cellsNumber) => {
+    let bombs = [];
+    while (bombs.length < numberBombs) {
+
+        let bomb;
+        do {
+            bomb = randomNumber(cellsNumber);
+        } while (bombs.includes(bomb));
+        bombs.push(bomb)
+    }
+    return bombs;
+}
+
+
+// Dichiaro il numero di bombe all'interno della griglia che a prescindere dalla difficoltà saranno sempre 16
+let numberBombs = 16;
 
 playButton.addEventListener('click', function(){
     // Al click pulisco il DOM (nel caso volessi rifare un'altra partita)
@@ -42,7 +62,7 @@ playButton.addEventListener('click', function(){
         // Creo la cella 
         const cell = createCell(difficult, i);
 
-        // Al click abbiamo un toggle che mi aggiunge la classe toggle 
+        // Al click abbiamo un evento che aggiunge classe e tiene conto del punteggio  
         cell.addEventListener('click', function(){
             if(!cell.classList.contains('clicked')){
             cell.classList.add('clicked')
