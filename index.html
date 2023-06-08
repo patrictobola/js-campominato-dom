@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+        integrity='sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=='
+        crossorigin='anonymous' />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css'
+        integrity='sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=='
+        crossorigin='anonymous' />
+    <link rel="stylesheet" href="css/style.css">
+    <title></title>
+</head>
+
+<body>
+    <header>
+        <nav class="d-flex justify-content-between align-items-center px-5 ">
+            <!-- Parte del logo -->
+            <div>
+                <h1>Boolean campo minato</h1>
+            </div>
+            <!-- Parte dove si seleziona la difficoltà e si starta il gioco  -->
+            <div>
+                <select name="difficult" id="difficult">
+                    <option value="hard">Hard</option>
+                    <option value="medium">Medium</option>
+                    <option value="easy">Easy</option>
+                </select>
+                <button type="button" class="btn btn-primary">Start game</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="gameElement" class="container p-5 d-flex flex-wrap">
+        </div>
+    </main>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

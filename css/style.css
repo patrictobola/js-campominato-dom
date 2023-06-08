@@ -1,0 +1,38 @@
+nav {
+  height: 80px;
+  background-color: lightcyan;
+}
+main {
+  background-color: lightseagreen;
+  height: calc(100vh - 80px);
+}
+.container {
+  height: 100%;
+}
+/* Cella di base  */
+.cell {
+  border: 1px solid sandybrown;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+/* Cella difficoltà hard  */
+.cell.hard {
+  width: calc(100% / 10);
+  height: calc(100% / 10);
+}
+/* Cella difficoltà medium  */
+.cell.medium {
+  width: calc(100% / 9);
+  height: calc(100% / 9);
+}
+/* Cella difficoltà easy  */
+.cell.easy {
+  width: calc(100% / 7);
+  height: calc(100% / 7);
+}
+/* Al click  */
+.clicked {
+  background-color: rgb(116, 220, 255);
+}
