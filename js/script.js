@@ -3,8 +3,8 @@ console.log('JS OK')
 // Recupero gli elementi necessari dal DOM 
 const userChoice = document.getElementById('difficult')
 const playButton = document.querySelector('button')
-const cellContainer = document.getElementById('gameElement')
-
+const cellContainer = document.getElementById('grid')
+const scoreField = document.getElementById('score')
 
 // Variabile che crea una casella con la classe cell 
 const createCell = (a, b) => {
@@ -35,6 +35,7 @@ playButton.addEventListener('click', function(){
     if (difficult === "medium") cells = 81;
     if (difficult === "easy") cells = 49;
 
+    let score = 0;
 
     // Creo il ciclo for che mi crea le caselle nel DOM 
     for (let i = 1; i <= cells; i++){
@@ -43,8 +44,12 @@ playButton.addEventListener('click', function(){
 
         // Al click abbiamo un toggle che mi aggiunge la classe toggle 
         cell.addEventListener('click', function(){
-            cell.classList.toggle('clicked')
-            console.log(i)
+            if(!cell.classList.contains('clicked')){
+            cell.classList.add('clicked')
+                console.log(i)
+                score++;
+                scoreField.innerHTML = score;
+            }
         });
 
         // Metto la cella all'interno del dom 

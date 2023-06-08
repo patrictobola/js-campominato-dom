@@ -9,6 +9,13 @@ main {
 .container {
   height: 100%;
 }
+#grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  height: 80%;
+  margin: auto auto;
+}
 /* Cella di base  */
 .cell {
   border: 1px solid sandybrown;
@@ -35,4 +42,5 @@ main {
 /* Al click  */
 .clicked {
   background-color: rgb(116, 220, 255);
+  cursor: not-allowed;
 }
