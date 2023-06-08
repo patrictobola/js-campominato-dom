@@ -40,9 +40,11 @@ const randomBombs = (numberBombs, cellsNumber) => {
 // Dichiaro il numero di bombe all'interno della griglia che a prescindere dalla difficoltà saranno sempre 16
 let numberBombs = 16;
 
+let generatedBombs = 0;
 playButton.addEventListener('click', function(){
     // Al click pulisco il DOM (nel caso volessi rifare un'altra partita)
     cellContainer.innerHTML = ``
+    scoreField.innerHTML = ``;
     
     // Recupero il valore della difficoltà di gioco 
     const difficult = userChoice.value ;
@@ -57,24 +59,37 @@ playButton.addEventListener('click', function(){
 
     let score = 0;
 
+    // Aggiungo le bombe alla partita
+    generatedBombs = randomBombs(numberBombs, cells);
+    
     // Creo il ciclo for che mi crea le caselle nel DOM 
     for (let i = 1; i <= cells; i++){
         // Creo la cella 
         const cell = createCell(difficult, i);
-
         // Al click abbiamo un evento che aggiunge classe e tiene conto del punteggio  
         cell.addEventListener('click', function(){
+
+            // Controllo se al click la cella non è già stata cliccata e in quel caso... 
             if(!cell.classList.contains('clicked')){
-            cell.classList.add('clicked')
+                cell.classList.add('clicked')
+                console.log(generatedBombs)
                 console.log(i)
-                score++;
-                scoreField.innerHTML = score;
+                scoreField.innerHTML = ++score;
+            }
+            // Creo un ciclo for che controlla l'array con le bombe e mi controlla se al click ho preso una bomba o meno
+            for(let i = 0; i < generatedBombs.length; i++){
+                if(parseInt(cell.innerText) === generatedBombs[i]){
+                    cell.classList.add('bomb')
+                    console.log(`La partita è terminata, nabbo!`)
+                }
             }
         });
-
+        
         // Metto la cella all'interno del dom 
         cellContainer.appendChild(cell)
     }
+    
+
 
 })
 

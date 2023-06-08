@@ -44,3 +44,6 @@ main {
   background-color: rgb(116, 220, 255);
   cursor: not-allowed;
 }
+.clicked.bomb {
+  background-color: red;
+}
