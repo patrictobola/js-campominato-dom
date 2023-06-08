@@ -5,6 +5,7 @@ const userChoice = document.getElementById('difficult')
 const playButton = document.querySelector('button')
 const cellContainer = document.getElementById('grid')
 const scoreField = document.getElementById('score')
+const message = document.getElementById('message')
 
 // Variabile che crea una casella con la classe cell 
 const createCell = (a, b) => {
@@ -45,6 +46,7 @@ playButton.addEventListener('click', function(){
     // Al click pulisco il DOM (nel caso volessi rifare un'altra partita)
     cellContainer.innerHTML = ``
     scoreField.innerHTML = ``;
+    message.innerHTML = ``;
     
     // Recupero il valore della difficoltà di gioco 
     const difficult = userChoice.value ;
@@ -72,20 +74,26 @@ playButton.addEventListener('click', function(){
         const cell = createCell(difficult, i);
         // Al click abbiamo un evento che aggiunge classe e tiene conto del punteggio  
         cell.addEventListener('click', function(){
-            if(isGameOver) return
+            if(isGameOver) {
+                // Recupero tutte le celle create 
+                const allCells = cellContainer.querySelectorAll('div');
+                allCells.classList.add('clicked')
+                return
+            }
+                
             // Controllo se al click la cella non è già stata cliccata e in quel caso... 
             if(!cell.classList.contains('clicked')){
                 cell.classList.add('clicked')
                 scoreField.innerHTML = ++score;
                 if (score === (cells - numberBombs)){
-                    alert(`Daje hai vinto!`)
+                    message.innerText = `Daje hai vinto!`;
                 }
             }
             // Creo un ciclo for che controlla l'array con le bombe e mi controlla se al click ho preso una bomba o meno
             for(let i = 0; i < generatedBombs.length; i++){
                 if(parseInt(cell.innerText) === generatedBombs[i]){
                     cell.classList.add('bomb')
-                    alert(`La partita è terminata, nabbo!`)
+                    message.innerText = `Beccato una bomba! Hai perso nabbo!`;
                     isGameOver = true;
                 }
             }
